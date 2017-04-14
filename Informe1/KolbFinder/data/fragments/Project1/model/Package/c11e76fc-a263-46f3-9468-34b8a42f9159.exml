@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="KolbFinder" version="4">
+  <OBJECT>
+    <ID name="KolbFinder" mc="Standard.Package" uid="c11e76fc-a263-46f3-9468-34b8a42f9159"/>
+    <PID name="Project1" mc="Standard.Project" uid="82a8a84e-6167-4a60-a815-a689df9b4617"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[KolbFinder]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Estudiante" mc="Standard.Class" uid="0da4750f-4517-4330-afb2-a2e3faa47414"/>
+        <COMPID name="Calificador" mc="Standard.Class" uid="b566abcd-093a-44af-93fe-f95a08a2b0d8"/>
+        <COMPID name="Experto" mc="Standard.Class" uid="dfc84672-6f8b-4f97-aa37-8ee657bc7547"/>
+        <COMPID name="Contenidos" mc="Standard.Class" uid="a1a89c1a-281a-4672-b484-dfaeee7c121a"/>
+        <COMPID name="Experto" mc="Standard.Actor" uid="94c3bb6c-5c70-459f-98f4-7be98fe58c82"/>
+        <COMPID name="Calificador" mc="Standard.Actor" uid="c40a25d0-a497-47c9-ab22-93997caabda8"/>
+        <COMPID name="Estudiante" mc="Standard.Actor" uid="00c90b1e-576b-460d-95fd-3fd3106a97d4"/>
+        <COMPID name="Colocar links de la Internet" mc="Standard.UseCase" uid="39f928c5-176f-40c8-b2b8-c9f183f2e5af"/>
+        <COMPID name="Seleccionar contenido para categorizar" mc="Standard.UseCase" uid="fb8ef0ad-5189-46e5-9123-caa86c83186f"/>
+        <COMPID name="Colocar contenido en la página" mc="Standard.UseCase" uid="3e1b23f5-c858-40ac-9eae-4f8b5f989de1"/>
+        <COMPID name="Calificar contenido seleccionado" mc="Standard.UseCase" uid="5136d5e7-3768-4d14-9043-a2c0d89a4a9a"/>
+        <COMPID name="Ver contenido Catalogado" mc="Standard.UseCase" uid="fba28656-fdd7-4625-bf03-4c655b4d2a8e"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="overview diagram" mc="Standard.ClassDiagram" uid="b1890b20-418d-4c59-acfe-7e9bf272ec3b"/>
+        <COMPID name="project1 Use Case diagram" mc="Standard.UseCaseDiagram" uid="dec20e47-d693-4c01-9cdf-8c90c1d8be86"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
