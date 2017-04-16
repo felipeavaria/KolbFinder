@@ -1,7 +1,7 @@
 # KolbFinder
 Proyecto ISW
 
-## Estructura de ficheros
+##Estructura de ficheros
 #### "/public"    
  -  contiene Entregable_1 y archivos para su elavoración.
 ##### "/public/aprobación cliente"
