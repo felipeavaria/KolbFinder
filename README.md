@@ -1,7 +1,9 @@
 # KolbFinder
 Proyecto ISW
 
-##Estructura de ficheros
+## Estructura de ficheros
+#### "/Software"    
+ -  Software del proyecto, seguir instrucciones del Readme en esa carpeta.
 #### "/public"    
  -  contiene Entregable_1 y archivos para su elavoración.
 ##### "/public/aprobación cliente"
