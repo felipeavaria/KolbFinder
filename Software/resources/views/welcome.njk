@@ -1,0 +1,17 @@
+{% extends 'master' %}
+
+{% block content %}
+
+
+<p>Bienvenido a la aplicación!, coloque una lsita de link donde quiera obtener contenido</p>
+
+
+{{ form.open({action: 'ContentsController.scrape'}) }}
+	{{ form.textarea('pagelist') }}
+	<div class="button">
+		{{ form.submit('Ingresar') }}
+	</div>
+{{ form.close() }}
+
+{% endblock %}
+

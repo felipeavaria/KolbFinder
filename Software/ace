@@ -1,0 +1,9 @@
+#!/bin/sh 
+":" //# comment; exec /usr/bin/env node --harmony_proxies "$0" "$@"
+
+'use strict'
+
+const kernel = require('./bootstrap/kernel')
+kernel()
+
+

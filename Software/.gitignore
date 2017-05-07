@@ -1,0 +1,8 @@
+node_modules
+storage
+!.gitkeep
+.env
+npm-debug.log
+public/cache
+tags
+.swp
