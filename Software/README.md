@@ -10,9 +10,9 @@ Programas necesarios para que la aplicación pueda ejecutarse:
 ## Instrucciones
 
 * Primero que nada, se necesita los paquetes de Node necesarios, para poder correr el software, ejecútelos con el comando:
-´´´ npm install ´´´
+``` npm install ```
 * Luego, una vez con el Software descargado, se encuentra listo para poder ejecutar el Servidor, esto se realiza con el comando:
-´´´ node run serve:dev ´´´
+``` node run serve:dev ```
 * Listo, disfrute de nuestro proyecto
 
 ## Bugs
