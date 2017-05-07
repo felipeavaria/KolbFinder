@@ -100,3 +100,7 @@ body {
 .__footer li a:hover {
   opacity: 1;
 }
+
+/*CSS que no sigue convenciones*/
+
+textarea {height: 200px; width: 400px;}

@@ -3,15 +3,26 @@
 {% block content %}
 
 
-<p>Bienvenido a la aplicación!, coloque una lsita de link donde quiera obtener contenido</p>
+<p>Bienvenido a la aplicación!, coloque una lista de link donde quiera obtener contenido</p>
 
+<div class="row">
+	<div class="col-sm-6">
+	  <h3>Ingresar Links</h3>
 
-{{ form.open({action: 'ContentsController.scrape'}) }}
-	{{ form.textarea('pagelist') }}
-	<div class="button">
-		{{ form.submit('Ingresar') }}
+	  {{ form.open({action: 'ContentsController.scrape'}) }}
+	  <div style="">
+			{{ form.textarea('pagelist') }}
+		  </div>
+		  <div class="button">
+			  {{ form.submit('Ingresar') }}
+		  </div>
+	  {{ form.close() }}
+
 	</div>
-{{ form.close() }}
+	<div class="col-sm-6">
+	</div>
+</div>
+
 
 {% endblock %}
 
