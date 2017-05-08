@@ -29,7 +29,10 @@ const globalMiddleware = [
 |
 */
 const namedMiddleware = {
-  auth: 'Adonis/Middleware/Auth'
+  auth: 'Adonis/Middleware/Auth',
+  typeauth: 'App/Http/Middleware/TypeAuth',
+  typeauthcal: 'App/Http/Middleware/TypeAuthCalificador',
+  jumpuser: 'App/Http/Middleware/JumpUser'
 }
 
 /*

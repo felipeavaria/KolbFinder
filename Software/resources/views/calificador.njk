@@ -1,3 +1,8 @@
-<h1> Hola Usuario! </h1>
+{% extends 'master' %}
+{% block content %}
+
+<h1> Hola {{ currentUser.username }}, usuario del tipo {{ type }}!!! </h1>
 
 <p>Todavia el profesor, no ha subido material para calificar</p>
+
+{% endblock %}

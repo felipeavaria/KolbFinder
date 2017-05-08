@@ -29,9 +29,9 @@
 
 <h3>Crear Usuario</h3>
 {{ form.open({action: 'UsersController.create'}) }}
-  {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, 'Tipo de aprendizaje usuario') }}
-
   {{ csrfField }}
+
+  {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, 'Tipo de aprendizaje usuario') }}
   <br>
   {{ form.label('email', 'Correo Electronico') }}
   {{ form.text('email') }}

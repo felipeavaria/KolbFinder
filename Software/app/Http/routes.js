@@ -18,15 +18,15 @@
 const Route = use('Route')
 const User = use('App/Model/User')
 
-Route.on('/').render('home')
-Route.on('/experto').render('welcome')
-.middleware('auth')
-Route.on('/calificador').render('calificador')
-.middleware('auth')
+/* Redirecciones*/
+Route.on('/').render('home').middleware('jumpuser')
+Route.on('/experto').render('experto').middleware('typeauth')
+//Route.on('/calificador').render('calificador').middleware('typeauthcal')
+Route.get('/calificador', 'UsersController.calificadordash').middleware('typeauthcal')
+
+/* API */
 Route.get('/test', 'ContentsController.scrape')
 .middleware('auth')
-//Route.get('/test2', 'ContentsController.renderview')
-//.middleware('auth:basic')
 Route.get('/test3', 'ContentsController.viewcontents')
 .middleware('auth')
 Route.post('/login', 'UsersController.login')
