@@ -1,0 +1,13 @@
+{% extends 'master' %}
+
+{% block content %}
+<h2>Imagenes del Sitio</h2>
+<br>
+
+<p style="display: none;">{{data}}</p>
+
+{% for asd in data %}
+	<img src={{ asd }}></img>
+{% endfor %}
+
+{% endblock %}

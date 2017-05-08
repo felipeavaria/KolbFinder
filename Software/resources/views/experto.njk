@@ -1,0 +1,27 @@
+{% extends 'master' %}
+{% block content %}
+
+
+<p>Bienvenido a la aplicación!, coloque una lista de link donde quiera obtener contenido</p>
+
+<div class="row">
+	<div class="col-sm-6">
+	  <h3>Ingresar Links</h3>
+
+	  {{ form.open({action: 'ContentsController.scrape'}) }}
+	  <div style="">
+			{{ form.textarea('pagelist') }}
+		  </div>
+		  <div class="button">
+			  {{ form.submit('Ingresar') }}
+		  </div>
+	  {{ form.close() }}
+
+	</div>
+	<div class="col-sm-6">
+	</div>
+</div>
+
+
+{% endblock %}
+

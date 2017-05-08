@@ -1,0 +1,8 @@
+https://es.wikipedia.org/wiki/Campo_el%C3%A9ctrico
+https://es.wikipedia.org/wiki/Ley_de_Coulomb
+https://pm429015.wordpress.com/2013/05/21/singular-value-decomposition-svd/
+
+
+Bugs:
+* Hay que enviar 2 veces los links, para que se pueda borrar la carpeta de cache, y descargar nuevas imagenes
+* Al colocar links "en blanco", el modulo tira error.
