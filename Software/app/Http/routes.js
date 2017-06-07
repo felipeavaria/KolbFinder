@@ -32,6 +32,10 @@ Route.get('/test3', 'ContentsController.viewcontents')
 Route.post('/login', 'UsersController.login')
 Route.post('/createuser', 'UsersController.create')
 Route.get('/logout', 'UsersController.logout')
+Route.get('/image', 'ContentsController.sendimages')
+// Sendcontent: enviar formulario ordenado, a la base de datos
+// y guardarlo, en el almacenamiento del sitio.
+Route.post('/sendcontent', 'ContentsController.sendcontent')
 
 Route.get('/users', function * (request, response) {
   const users = yield User.all() 

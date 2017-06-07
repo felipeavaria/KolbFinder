@@ -104,3 +104,17 @@ body {
 /*CSS que no sigue convenciones*/
 
 textarea {height: 200px; width: 400px;}
+
+
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 5vh;
+}
+
+.content {
+  flex: 1;
+}
+
+

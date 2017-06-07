@@ -6,8 +6,40 @@
 
 <p style="display: none;">{{data}}</p>
 
-{% for asd in data %}
-	<img src={{ asd }}></img>
-{% endfor %}
+<!-- Del formulario, lo enviara Vue, por lo que editar las variables
+  internas de este, y no enviarlo a través de Adonis (solo en
+  este caso).
+-->
+<h2>Nombre Catalogo</h2>
+<input v-model="nombrecatalogo" placeholder="Catálogo"></input>
+<h2>Categoria/Asignatura Catalogo</h2>
+<select>
+  <option value="1">Fisica</option>
+  <option value="2">Matematica</option>
+  <option value="3">Programación</option>
+  <option value="4">Diseño</option>
+</select>
+
+
+
+<h2>Material Obtenido</h2>
+<div id="imgcliente"
+	 class="flex-container"
+	style="position: relative;"	 
+  >
+  {% raw %}
+  <draggable v-model="images">
+	  <transition-group>
+		  <div class="content" v-for="image in images" :key="image.key">
+		<img @click="image.select = false" v-if="image.select" style="float: left; border-style: solid; border-width: 3px; border-color: green; margin: 3px 3px 3px 3px" :src="image.src"></img>
+		<img @click="image.select = true" v-else style="float: left; border-style: solid; border-width: 3px; border-color: red; margin: 3px 3px 3px 3px" :src="image.src"></img>
+		  </div>
+	  </transition-group>
+  </draggable>
+  {% endraw %}
+  <button @click="sendcontent" class="btn-primary">Enviar Contenido</button>
+</div>
+<br>
+
 
 {% endblock %}

@@ -50,6 +50,41 @@ class ContentsController {
 		yield response.sendView('test', {data: arr })
 
 	}
+  //
+
+  /* Función de API, para entregar los archivos subidos actualmente */
+  * sendimages (request, response){
+	  var arr = [];
+	  arr =	fs.readdirSync('public/cache/images')
+	  arr.forEach(function(file,index,arra){arra[index] = 'cache/images/'+file});
+	  response.send({ data: arr })
+  }
+  //
+
+  /* Subir imagenes o contenido, */
+  * sendcontent (request, response){
+	/*
+	const catalogo = new catalogo()
+	catalogo.name = request.input("nombre_catag") 
+	catalogo.area = request.input("catalogo_area") //fisica, mate
+	const material = new material()
+	data = request.input("arr")
+	data.forEach(function(value){
+		Hacelo sincrono, o que subido uno se suba el que vien despues del orden
+	})
+	material.tipoarchivo = ...
+	material.
+	send()...
+	*/
+	console.log("llegamos al controlador")
+	var data = request.post()
+	data.forEach(asd => {
+		if(asd.select === true) console.log(asd)
+	})
+	response.send("asdfasd")
+  
+  }
+  //
 
   * renderview (request, response) {
 	  //const user = request.param('user')
