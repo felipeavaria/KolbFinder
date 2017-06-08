@@ -14,7 +14,7 @@ class ContentsTableSchema extends Schema {
   }
 
   down () {
-    this.drop('contents')
+    this.drop('users')
   }
 
 }
