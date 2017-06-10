@@ -1,5 +1,7 @@
 'use strict'
 
+const User = use('App/Model/User')
+
 /*
 |--------------------------------------------------------------------------
 | Database Seeder
@@ -18,6 +20,12 @@ class DatabaseSeeder {
 
   * run () {
     // yield Factory.model('App/Model/User').create(5)
+	  var admin = new User()
+	  admin.username = "Admin"
+	  admin.email = "admin@kolbfinder.kf"
+	  admin.password = "1234"
+	  admin.type = 0
+	  yield admin.save()
   }
 
 }
