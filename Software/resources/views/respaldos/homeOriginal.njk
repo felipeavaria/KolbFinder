@@ -1,0 +1,51 @@
+{% extends 'master' %}
+
+{% block content %}
+
+
+<h2>Login</h2>
+
+{{ form.open({action: 'UsersController.login'}) }}
+
+  {{ csrfField }}
+
+  <div class="field">
+    {{ form.label('email', 'Correo') }}
+    {{ form.text('email') }}
+  </div>
+
+  <div class="field">
+    {{ form.label('password', 'Password') }}
+    {{ form.password('password') }}
+  </div>
+
+  <div class="button">
+    {{ form.submit('Login') }}
+  </div>
+
+{{ form.close() }}
+
+
+
+<h3>Crear Usuario</h3>
+{{ form.open({action: 'UsersController.create'}) }}
+  {{ csrfField }}
+
+  {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, 'Tipo de aprendizaje usuario') }}
+  <br>
+  {{ form.label('email', 'Correo Electronico') }}
+  {{ form.text('email') }}
+  <br>
+  {{ form.label('username', 'Nombre de Usuario') }}
+  {{ form.text('username') }}
+  <br>
+  {{ form.label('password', 'Contraseña') }}
+  {{ form.password('password') }}
+
+  <div class="button">
+	{{ form.submit('Registrar') }}
+  </div>
+{{ form.close() }}
+
+{% endblock %}
+
