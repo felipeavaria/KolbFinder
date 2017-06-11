@@ -61,28 +61,27 @@ class ContentsController {
   }
   //
 
-  /* Subir imagenes o contenido, */
   * sendcontent (request, response){
-	/*
-	const catalogo = new catalogo()
-	catalogo.name = request.input("nombre_catag") 
-	catalogo.area = request.input("catalogo_area") //fisica, mate
-	const material = new material()
-	data = request.input("arr")
-	data.forEach(function(value){
-		Hacelo sincrono, o que subido uno se suba el que vien despues del orden
-	})
-	material.tipoarchivo = ...
-	material.
-	send()...
-	*/
-	console.log("llegamos al controlador")
 	var data = request.post()
-	data.forEach(asd => {
-		if(asd.select === true) console.log(asd)
+	var date = Date.now()
+	var aux = []
+
+	var dir = 'public/content';
+	if (!fs.existsSync(dir)) fs.mkdirSync(dir) 
+
+	data.contenido.forEach(asd => {
+		if(asd.select === true) {
+		  try {
+			fs.copySync("public/"+asd.src, dir+"/"+date+"_"+asd.key)
+			console.log('success!')
+			aux.push(date+"_"+asd.key)
+		  } catch (err) {
+			console.error(err)
+		  }
+		}
 	})
-	response.send("asdfasd")
-  
+	console.log(aux)
+	response.json(data)
   }
   //
 

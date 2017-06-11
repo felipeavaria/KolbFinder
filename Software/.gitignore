@@ -6,3 +6,5 @@ npm-debug.log
 public/cache
 tags
 .swp
+.swo
+public/content
