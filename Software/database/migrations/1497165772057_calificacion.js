@@ -19,9 +19,7 @@ class CalificacionTableSchema extends Schema {
   }
 
   down () {
-    this.table('calificacion', (table) => {
-      // opposite of up goes here
-    })
+    this.drop('calificacion')
   }
 
 }

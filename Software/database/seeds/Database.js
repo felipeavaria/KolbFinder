@@ -26,6 +26,34 @@ class DatabaseSeeder {
 	  admin.password = "1234"
 	  admin.type = 0
 	  yield admin.save()
+
+	  var catalogador = new User()
+	  catalogador.username = "Conv"
+	  catalogador.email = "conv@kolbfinder.kf"
+	  catalogador.password = "1234"
+	  catalogador.type = 1
+	  yield catalogador.save()
+
+	  var catalogador = new User()
+	  catalogador.username = "Dive"
+	  catalogador.email = "dive@kolbfinder.kf"
+	  catalogador.password = "1234"
+	  catalogador.type = 2
+	  yield catalogador.save()
+
+	  var catalogador = new User()
+	  catalogador.username = "Asim"
+	  catalogador.email = "asim@kolbfinder.kf"
+	  catalogador.password = "1234"
+	  catalogador.type = 3
+	  yield catalogador.save()
+
+	  var catalogador = new User()
+	  catalogador.username = "Acom"
+	  catalogador.email = "acom@kolbfinder.kf"
+	  catalogador.password = "1234"
+	  catalogador.type = 4
+	  yield catalogador.save()
   }
 
 }
