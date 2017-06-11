@@ -77,7 +77,7 @@ class UsersController {
 		break
 	}
 	console.log(typestring)
-	yield response.sendView('calificador', { type: typestring })
+	yield response.sendView('calificador/dashboard', { type: typestring })
   }
 
   * logout (request, response) {

@@ -47,7 +47,7 @@ class ContentsController {
 				arr.push('cache/images/'+file);
 			})
 		})
-		yield response.sendView('test', {data: arr })
+		yield response.sendView('experto/upload-content', {data: arr })
 
 	}
   //
