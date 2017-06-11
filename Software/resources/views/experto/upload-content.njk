@@ -1,6 +1,6 @@
-{% extends 'master2' %}
-
+{% extends 'experto/master' %}
 {% block content %}
+
 <h2>Imagenes del Sitio</h2>
 <br>
 
@@ -10,6 +10,7 @@
   internas de este, y no enviarlo a través de Adonis (solo en
   este caso).
 -->
+<div id="imgcliente">
 <h2>Nombre Catalogo</h2>
 <input v-model="nombrecatalogo" placeholder="Catálogo"></input>
 <h2>Categoria/Asignatura Catalogo</h2>
@@ -23,10 +24,7 @@
 
 
 <h2>Material Obtenido</h2>
-<div id="imgcliente"
-	 class="flex-container"
-	style="position: relative;"	 
-  >
+<div class="flex-container" style="position: relative;">
   {% raw %}
   <draggable v-model="images">
 	  <transition-group>
@@ -37,9 +35,9 @@
 	  </transition-group>
   </draggable>
   {% endraw %}
-  <button @click="sendcontent" class="btn-primary">Enviar Contenido</button>
+  <button @click="sendcontent" class="btn btn-primary">Enviar Contenido</button>
 </div>
 <br>
-
+</div>
 
 {% endblock %}

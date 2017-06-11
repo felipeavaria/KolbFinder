@@ -1,51 +1,149 @@
-{% extends 'master' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>KolbFinder Project</title>
+  <link rel="icon" href="/assets/logokf.png" type="image/x-icon">
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="css/theme.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link rel="icon" href="/assets/logokf.png" type="image/x-icon">
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<!-- Navigation -->
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
 
-{% block content %}
+      <a class="navbar-brand page-scroll" href="index.html">
+        KolbFinder</a>
+      <img class="img-responsive" src="assets/logokf.png" style="width:40px;height:40px;margin-top:5px;"></img>
+    </div>
 
-
-<h2>Login</h2>
-
-{{ form.open({action: 'UsersController.login'}) }}
-
-  {{ csrfField }}
-
-  <div class="field">
-    {{ form.label('email', 'Correo') }}
-    {{ form.text('email') }}
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="portfolio-item.html">Información</a>
+        </li>
+        <li>
+          <a href="page-sample.html">Contacto</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+          <ul id="login-dp" class="dropdown-menu">
+            <li>
+              {{ form.open({action: 'UsersController.login'}) }}
+              {{ csrfField }}
+              <div class="row">
+                <div class="col-md-12">
+                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                      <font color="black">
+                        <label class="sr-only" for="exampleInputEmail2">Correo Electrónico</label>
+                        {{ form.label('email', 'Correo') }}
+                        {{ form.text('email', null, {class:'form-control'}) }}
+                      </font>
+                    </div>
+                    <div class="form-group">
+                      <font color="black">
+                      {{ form.label('password', 'Password') }}
+                      {{ form.password('password', null, {class:'form-control'}) }}
+                      </font>
+                    </div>
+                    <div>
+                      {{ form.submit('Entrar', 'entrar', { class: 'btn btn-primary btn-block' }) }}
+                    </div>
+                  </form>
+                </div>
+                <div class="bottom text-center">
+                  <font color="black">¿Nuevo?</font> <a href="#"><b><font color="black">Registrarse</font></b></a>
+                </div>
+              </div>
+              {{ form.close() }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
   </div>
-
-  <div class="field">
-    {{ form.label('password', 'Password') }}
-    {{ form.password('password') }}
+  <!-- /.container -->
+</nav>
+<!-- Intro Header -->
+<header class="intro">
+  <div class="intro-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h1 class="brand-heading">KOLBFINDER</h1>
+          <p class="intro-text">
+            PORTAL DE FÍSICA INTELIGENTE POR SECySO
+          </p>
+          <a href="#about" class="btn btn-circle page-scroll">
+            <i class="fa fa-angle-double-down animated"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="button">
-    {{ form.submit('Login') }}
+</header>
+<!-- About Section -->
+<section id="about">
+  <div class="container content-section textt-center">
+    <div class="row">
+      <center><h2>MATERIAL ADAPTATIVO</h2></center>
+      <div class="col-lg-8 col-lg-offset-2">
+        <p align="justify">
+          KolbFinder es una plataforma de estudio con contenidos organizados por expertos y algoritmos para que el material se adapte al estudiante,
+          aprovechando de mejor manera los elementos que ofrece el portal a sus alumnos.
+        </p>
+        <p>
+        <center><a href="#" class="btnghost"><i></i> Ingresar al Portal</a></center>
+        </p>
+      </div>
+    </div>
   </div>
+</section>
 
-{{ form.close() }}
-
-
-
-<h3>Crear Usuario</h3>
-{{ form.open({action: 'UsersController.create'}) }}
-  {{ csrfField }}
-
-  {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, 'Tipo de aprendizaje usuario') }}
-  <br>
-  {{ form.label('email', 'Correo Electronico') }}
-  {{ form.text('email') }}
-  <br>
-  {{ form.label('username', 'Nombre de Usuario') }}
-  {{ form.text('username') }}
-  <br>
-  {{ form.label('password', 'Contraseña') }}
-  {{ form.password('password') }}
-
-  <div class="button">
-	{{ form.submit('Registrar') }}
+<!-- Footer -->
+<footer>
+  <div class="container text-center">
+    <p class="credits">
+      Copyright &copy; Your Website 2015<br/>
+      "Aries" Template by WowThemes.net
+    </p>
   </div>
-{{ form.close() }}
-
-{% endblock %}
+</footer>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/theme.js"></script>
+</body>
+</html>
 
