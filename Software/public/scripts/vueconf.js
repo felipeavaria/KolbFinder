@@ -15,7 +15,6 @@ var app = new Vue({
   },
   mounted: function () {
      // make sure you have vue-resource inlcued in your html head
-	//
 	console.log("aplicando el mounted2")
 	that = this
 	this.$http.get("image").then(response => {
@@ -28,7 +27,6 @@ var app = new Vue({
 		  	src: value
 		})
 	  });
-
 	}, response => {
 	  console.log("error")
 	  // error callback
@@ -44,14 +42,12 @@ var app = new Vue({
 	  //this.$http.post('/someUrl', [data], [options]).then(successCallback, errorCallback);
 	  console.log("enviando contenido")
 		
-	  this.$http.post("sendcontent", this.images).then(response => {
+	  this.$http.post("sendcontent", {nombre: this.nombrecatalogo, contenido: this.images})
+		.then(response => {
 	 	console.log("success") 
 	  }, response => {
 	  	console.log("error")
 	  })
-	  console.log(this.token)
-	  var that = this
-	  
 	},
     greet: function (event) {
       // `this` inside methods point to the Vue instance
