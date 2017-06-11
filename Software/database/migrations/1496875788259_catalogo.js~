@@ -10,7 +10,7 @@ class CatalogoTableSchema extends Schema {
       table.timestamps()
       table.string('titulo').unique()
       table.string('descripcion')
-      table.integer('estado')
+      table.integer('estado') /* 0=borrador , 1=por catalogar ,2=publico */
     })
   }
 

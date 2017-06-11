@@ -8,9 +8,9 @@ class ContenidoTableSchema extends Schema {
     this.create('contenido', (table) => {
       table.increments()
       table.timestamps()
-      table.string('titulo').unique()
+
       table.string('cuerpo') /* contenido u objeto */
-      table.integer('estio') /* tipo de objeo */
+      table.integer('estilo') /* tipo de objeo */
     })
   }
 
