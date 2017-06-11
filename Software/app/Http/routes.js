@@ -17,6 +17,12 @@
 
 const Route = use('Route')
 const User = use('App/Model/User')
+const Catalogo = use('App/Model/Catalogo')
+const Contenido = use('App/Model/Contenido')
+const Calificacion = use('App/Model/CalificacionContenido')
+const Referencium = use('App/Model/Referencium')
+
+
 
 /* Redirecciones*/
 Route.on('/').render('home').middleware('jumpuser')
@@ -40,4 +46,24 @@ Route.post('/sendcontent', 'ContentsController.sendcontent')
 Route.get('/users', function * (request, response) {
   const users = yield User.all() 
   response.ok(users)
+})
+
+Route.get('/catalogo', function * (request, response) {
+  const catalogo = yield Catalogo.all() 
+  response.ok(catalogo)
+})
+
+Route.get('/contenido', function * (request, response) {
+  const contenido = yield Contenido.all() 
+  response.ok(contenido)
+})
+
+Route.get('/calificacion', function * (request, response) {
+  const calificacion = yield Calificacion.all() 
+  response.ok(calificacion)
+})
+
+Route.get('/referencia', function * (request, response) {
+  const referencia = yield Referencium.all() 
+  response.ok(referencia)
 })
