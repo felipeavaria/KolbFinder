@@ -7,5 +7,7 @@ public/cache
 tags
 .swp
 .swo
+.*.swo
+.sqlite
 public/content
 *~

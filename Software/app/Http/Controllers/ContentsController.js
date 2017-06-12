@@ -2,6 +2,9 @@
 
 const	scrape	 	= require('website-scraper')
 const	fs 			= require('fs-extra')
+const User = use('App/Model/User')
+const Catalogo = use('App/Model/Catalogo')
+const Contenido = use('App/Model/Contenido')
 
 class ContentsController {
 
@@ -80,9 +83,35 @@ class ContentsController {
 		  }
 		}
 	})
-	console.log(aux)
+		
+//Agregar a la base de Datos	
+//vease documentacion para no caer en lo que he caido recien xD:
+		//https://adonisjs.com/docs/3.2/lucid#_basic_example
+	const catalog = new Catalogo()
+	catalog.titulo = data.nombre
+	catalog.estado = 1
+	yield catalog.save()
+
+	var contents_arr = []
+	aux.forEach(a => {
+		var as = {}
+		as.catalogo_id = catalog.id
+		as.cuerpo = a
+		contents_arr.push(as)
+	})
+	const contents = yield Contenido.createMany(contents_arr)
 	response.json(data)
   }
+
+	// Funcion para probar, si el agregar a la BD, funciona
+	* yapo (request, response){
+		var content = new Contenido()
+		content.catalogo_id = 0
+		content.cuerpo = "xxxxxxxxxx"
+		yield content.save()
+		response.send("ya")
+	}
+
   //
 
   * renderview (request, response) {
