@@ -44,7 +44,7 @@ var app = new Vue({
 		
 	  this.$http.post("sendcontent", {nombre: this.nombrecatalogo, contenido: this.images})
 		.then(response => {
-	 	console.log("success") 
+			window.location.href = 'experto';
 	  }, response => {
 	  	console.log("error")
 	  })
