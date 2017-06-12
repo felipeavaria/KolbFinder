@@ -15,7 +15,6 @@ var app = new Vue({
   },
   mounted: function () {
      // make sure you have vue-resource inlcued in your html head
-	console.log("aplicando el mounted2")
 	that = this
 	this.$http.get("image").then(response => {
 	  // get body data

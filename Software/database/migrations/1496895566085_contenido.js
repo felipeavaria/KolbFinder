@@ -12,6 +12,7 @@ class ContenidoTableSchema extends Schema {
       table.string('cuerpo') /* contenido u objeto */
       table.integer('estilo') /* tipo de objeo */
       table.integer('catalogo_id') /* tipo de objeo */
+      table.foreign('catalogo_id').references('id').on('catalogo')
     })
   }
 
