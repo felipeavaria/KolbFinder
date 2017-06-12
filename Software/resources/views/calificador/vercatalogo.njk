@@ -1,0 +1,10 @@
+{% extends 'calificador/master' %}
+{% block content %}
+
+<p>Si, estaas bien</p>
+
+{% for item in contenidos %}
+	<img src="{{ '../../content/'+item.cuerpo }}"></img>
+{% endfor %}
+
+{% endblock %}

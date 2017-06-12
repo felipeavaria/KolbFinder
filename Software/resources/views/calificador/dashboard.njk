@@ -5,4 +5,9 @@
 
 <p>Todavia el profesor, no ha subido material para calificar</p>
 
+{% for item in catalogos %}
+	
+<a href="{{ 'calificador/catalogo/' + item.id }}">{{ item.titulo }}</a>
+{% endfor %}
+
 {% endblock %}

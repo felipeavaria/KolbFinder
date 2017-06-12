@@ -2,6 +2,7 @@
 
 const Hash = use('Hash')
 const User = use('App/Model/User')
+const Catalogo = use('App/Model/Catalogo')
 
 class UsersController {
 
@@ -77,7 +78,11 @@ class UsersController {
 		break
 	}
 	console.log(typestring)
-	yield response.sendView('calificador/dashboard', { type: typestring })
+
+	const catalogos_ = yield Catalogo.all()
+		console.log(catalogos_)
+
+	yield response.sendView('calificador/dashboard', { type: typestring, catalogos: catalogos_.toJSON() })
   }
 
   * logout (request, response) {

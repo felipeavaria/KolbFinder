@@ -9,7 +9,8 @@ class Catalogo extends Lucid {
 	}
 
   contenidos () {
-    return this.hasMany('App/Model/Contenido')
+		console.log("usando el metodo")
+    return this.hasMany('App/Model/Contenido', 'id', 'catalogo_id')
   }
 }
 

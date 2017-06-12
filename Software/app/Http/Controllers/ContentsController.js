@@ -65,42 +65,42 @@ class ContentsController {
   //
 
   * sendcontent (request, response){
-	var data = request.post()
-	var date = Date.now()
-	var aux = []
+		var data = request.post()
+		var date = Date.now()
+		var aux = []
 
-	var dir = 'public/content';
-	if (!fs.existsSync(dir)) fs.mkdirSync(dir) 
+		var dir = 'public/content';
+		if (!fs.existsSync(dir)) fs.mkdirSync(dir) 
 
-	data.contenido.forEach(asd => {
-		if(asd.select === true) {
-		  try {
-			fs.copySync("public/"+asd.src, dir+"/"+date+"_"+asd.key)
-			console.log('success!')
-			aux.push(date+"_"+asd.key)
-		  } catch (err) {
-			console.error(err)
-		  }
-		}
-	})
-		
-//Agregar a la base de Datos	
-//vease documentacion para no caer en lo que he caido recien xD:
-		//https://adonisjs.com/docs/3.2/lucid#_basic_example
-	const catalog = new Catalogo()
-	catalog.titulo = data.nombre
-	catalog.estado = 1
-	yield catalog.save()
+		data.contenido.forEach(asd => {
+			if(asd.select === true) {
+				try {
+				fs.copySync("public/"+asd.src, dir+"/"+date+"_"+asd.key)
+				aux.push(date+"_"+asd.key)
+				} catch (err) {
+				console.error(err)
+				}
+			}
+		})
+			
+	//Agregar a la base de Datos	
+	//vease documentacion para no caer en lo que he caido recien xD:
+			//https://adonisjs.com/docs/3.2/lucid#_basic_example
+		const catalog = new Catalogo()
+		catalog.titulo = data.nombre
+		catalog.estado = 1
+		yield catalog.save()
 
-	var contents_arr = []
-	aux.forEach(a => {
-		var as = {}
-		as.catalogo_id = catalog.id
-		as.cuerpo = a
-		contents_arr.push(as)
-	})
-	const contents = yield Contenido.createMany(contents_arr)
-	response.json(data)
+		var contents_arr = []
+		aux.forEach(a => {
+			var as = {}
+			as.catalogo_id = catalog.id
+			as.cuerpo = a
+			as.estilo = 0
+			contents_arr.push(as)
+		})
+		const contents = yield Contenido.createMany(contents_arr)
+		response.json(data)
   }
 
 	// Funcion para probar, si el agregar a la BD, funciona
@@ -118,6 +118,26 @@ class ContentsController {
 	  //const user = request.param('user')
     yield response.sendView('test')
   }
+	//
+		
+  * getcatalogos (request, response) {
+		var catalogos = yield Catalogo.all()
+
+		response.send(catalogos)
+  }
+
+
+  * getcontenidos (request, response) {
+		const id = request.param('id')
+		const contenidos = yield Contenido.query().where('catalogo_id', id)
+
+		//var contea = catalogos[0].contenidos()
+
+		yield response.sendView('calificador/vercatalogo', { contenidos: contenidos })
+  }
+
+	
+
 	//
 
   * ingreso (request, response) {
