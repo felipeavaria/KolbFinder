@@ -9,7 +9,6 @@ const Contenido = use('App/Model/Contenido')
 class ContentsController {
 
   * scrape (request, response) {
-	  //console.log(request.only('pagelist').pagelist)
 		var data = request.only('pagelist').pagelist
 		var pages = data.split('\r\n')
 	  	console.log(pages);
@@ -35,7 +34,6 @@ class ContentsController {
 			response.redirect('/test3')
 		}
 		else if(error) console.log("error")
-		console.log("asdfdsafd")
 	}
 	))
 	  //yield response.sendView('test', { data: "sadfadsfds" });
@@ -45,7 +43,6 @@ class ContentsController {
 		var arr = [];
 		fs.readdir('public/cache/images', (err, files) => {
 			files.forEach(file => {
-				//console.log(file);
 				//Se parte en Cache, por que el Root de las views, es "public"
 				arr.push('cache/images/'+file);
 			})
@@ -102,6 +99,14 @@ class ContentsController {
 		const contents = yield Contenido.createMany(contents_arr)
 		response.json(data)
   }
+
+	* sendcatalogo (request, response){
+		//	SEra un "GET", por lo que id lo tengo de arriba
+	//	var data = request.post()
+		const id = request.param('id')
+		const contenidos = yield Contenido.query().where('catalogo_id', id)
+		response.json(contenidos)
+	}
 
 	// Funcion para probar, si el agregar a la BD, funciona
 	* yapo (request, response){

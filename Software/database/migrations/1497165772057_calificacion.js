@@ -14,8 +14,6 @@ class CalificacionTableSchema extends Schema {
       table.foreign('contenido_id').references('id').on('contenido')
       table.integer('calificacion') 
     })   
-
-    
   }
 
   down () {

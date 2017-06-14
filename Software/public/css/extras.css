@@ -7,3 +7,8 @@
 section.content {
   flex: 1;
 }
+
+textarea {
+		width: 800px;
+		height: 500px;
+}

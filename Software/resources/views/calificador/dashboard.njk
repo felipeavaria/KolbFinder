@@ -1,13 +1,19 @@
 {% extends 'calificador/master' %}
 {% block content %}
 
-<h1> Hola {{ currentUser.username }}, usuario del tipo {{ type }}!!! </h1>
+<h2> Hola {{ currentUser.username }}, tipo de usuario {{ type }}</h2>
 
+{% if not catalogos %}
 <p>Todavia el profesor, no ha subido material para calificar</p>
 
+{% else %}
+<ul>
 {% for item in catalogos %}
 	
-<a href="{{ 'calificador/catalogo/' + item.id }}">{{ item.titulo }}</a>
+	<li><a href="{{ '/calificador/catalogo?id=' + item.id }}">{{ item.titulo }}</a></li>
 {% endfor %}
+</ul>
+
+{% endif %}
 
 {% endblock %}
