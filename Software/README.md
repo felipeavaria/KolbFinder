@@ -1,20 +1,30 @@
 # KolbFinder
 
-Esta es la sección del Software de KolbFinder :hand:. Aquí es donde se entregara las instrucciones para poder correrlo en su respectivo Computador o Server.
+Esta es la sección del Software de KolbFinder :hand:. Aquí es donde se entregara las instrucciones para poder ejecutar el Software en su respectivo Computador o Servidor.
 
 ## Prerequisitos
-Programas necesarios para que la aplicación pueda ejecutarse:
+Programas necesarios para instalar depedencias:
+* Bash / GitBash (Windows)
 * NodeJs
 * NPM
 
 ## Instrucciones
 
-* Primero que nada, se necesita los paquetes de Node necesarios, para poder correr el software, ejecútelos con el comando:
-``` npm install ```
-* Luego, una vez con el Software descargado, se encuentra listo para poder ejecutar el Servidor, esto se realiza con el comando:
-``` node run serve:dev ```
-* En el navegador, ingresar a "localhost:3333"
-* Listo, disfrute de nuestro proyecto
+### Linux
+* Tener instalado Node, y Npm
+* Luego, correr el comando ``` npm install ``` para instalar los modulos. Se requiere permisios de escritura en el directorio
+* Luego, setiene que crear el archivo .env. utilice el comando ``` mv .env.example .env ```
+* Utilizar los siguientes comandos de Adonis, para inicializar la base de datos:
+	* ``` node ace migration:refresh ```
+	* ``` node ace db:seed ```
+* La plataforma se encuentra lista para correr, utilice el comando "node server.js", y luego acceda a la dirección ``` localhost:3333 ```
+
+### Windows
+* Tener instalado la aplicación Git.
+* Correr el programa de Shell "Git Bash", con permisos de escritura
+* Ir a la Carpeta del Proyecto ./KolbFinder/Software
+* Proceder con los comandos señalados en Linux
+* Listo, la plataforma se encuentra lista para ser usada.
 
 ### Usuarios de la página
 En la Pantalla principal, el primer formularo es el ingreso de usuario. El segundo, para registar Catalogadores. Por ahora, no hay como registar administradores, pero si catalogadores:

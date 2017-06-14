@@ -45,6 +45,8 @@ Route.post('/sendcontent', 'ContentsController.sendcontent')
 
 //Route.get('/yapo', 'ContentsController.yapo')
 Route.get('calificador/catalogo/:id', 'ContentsController.getcontenidos')
+Route.get('calificador/catalogo/api/:id', 'ContentsController.sendcatalogo') //El q se usa de API
+Route.get('calificador/catalogo', 'ContentsController.getcontenidos')
 
 Route.get('/users', function * (request, response) {
   const users = yield User.all() 
@@ -70,3 +72,6 @@ Route.get('/referencia', function * (request, response) {
   const referencia = yield Referencium.all() 
   response.ok(referencia)
 })
+
+
+Route.post('/enviarcalificacion', 'CalificacionController.enviarcalificacion')

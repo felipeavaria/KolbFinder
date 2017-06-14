@@ -1,10 +1,19 @@
 {% extends 'calificador/master' %}
 {% block content %}
 
-<p>Si, estaas bien</p>
+<div id="contentview" class="flex-container" style="position: relative;">
+{% raw %}
+<div class="content">
+	  <transition-group>
+		  <div class="content" v-for="image in images" :key="image.key">
+		<img @click="image.select = false" v-if="image.select" style="float: left; border-style: solid; border-width: 3px; border-color: green; margin: 3px 3px 3px 3px" :src="image.src"></img>
+		<img @click="image.select = true" v-else style="float: left; border-style: solid; border-width: 3px; border-color: red; margin: 3px 3px 3px 3px" :src="image.src"></img>
+		  </div>
+	  </transition-group>
+</div>
+{% endraw %}
 
-{% for item in contenidos %}
-	<img src="{{ '../../content/'+item.cuerpo }}"></img>
-{% endfor %}
+  <button @click="sendcontent" class="btn btn-primary">Enviar Calificación</button>
+</div>
 
 {% endblock %}
