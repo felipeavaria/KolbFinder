@@ -28,8 +28,13 @@ Programas necesarios para instalar depedencias:
 
 ### Usuarios de la página
 En la Pantalla principal, el primer formularo es el ingreso de usuario. El segundo, para registar Catalogadores. Por ahora, no hay como registar administradores, pero si catalogadores:
-* Administrador: mail: admin@kolbfinder.kf , pass: 1234
-* Catalogador: user/mail: as123@gmail.com , pass: 1234. O también puede crear catalogadores a través del formulario bajo el login
+* Administrador:
+	* mail: admin@kolbfinder.kf , pass: 1234
+* Catalogadores: 
+	* mail: conv@gmail.com , pass: 1234.  (Convergente)
+	* mail: dive@gmail.com , pass: 1234.  (Divergente)
+	* mail: asim@gmail.com , pass: 1234.  (Asimilador)
+	* mail: acom@gmail.com , pass: 1234.  (Acomodador)
 
 ## Bugs
 Debido a que recién estamos con nuestro primer prototipo, es que el Software tiene un par de bues que van a ser corregidos en próximas entregas :construction_worker: :
