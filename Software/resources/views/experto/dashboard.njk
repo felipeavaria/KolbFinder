@@ -24,5 +24,25 @@
 
 			</div>
 
+<h3>Crear Usuario</h3>
+{{ form.open({action: 'UsersController.create'}) }}
+  {{ csrfField }}
+
+  {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, 'Tipo de aprendizaje usuario') }}
+  <br>
+  {{ form.label('email', 'Correo Electronico') }}
+  {{ form.text('email') }}
+  <br>
+  {{ form.label('username', 'Nombre de Usuario') }}
+  {{ form.text('username') }}
+  <br>
+  {{ form.label('password', 'Contraseña') }}
+  {{ form.password('password') }}
+
+  <div class="button">
+	{{ form.submit('Registrar') }}
+  </div>
+{{ form.close() }}
+
 {% endblock %}
 
