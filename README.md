@@ -5,7 +5,7 @@ Proyecto ISW
 #### "/Software"    
  -  Software del proyecto, seguir instrucciones del Readme en esa carpeta.
 #### "/public"    
- -  contiene Entregable_1 y archivos para su elavoración.
+ -  contiene Entregables 1, 2 y 3, con el nombre de "Informe_N°.pdf", y archivos para su elaboración.
 ##### "/public/aprobación cliente"
  -  Correo del cliente donde se aprueba el pre-proyecto para comenzar.
 ##### "/public/archivos modelio_Entrega_1"
