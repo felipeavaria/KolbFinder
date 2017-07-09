@@ -18,7 +18,6 @@ var app = new Vue({
 	that = this
 	this.$http.get("image").then(response => {
 	  // get body data
-	  console.log(response.data.data);
 	  response.data.data.forEach(function(value, index){
 		that.images.push({
 		  	key: index,
@@ -39,7 +38,6 @@ var app = new Vue({
 	sendcontent: function(event){
 	  //https://laracasts.com/discuss/channels/vue/sending-values-with-vue-resource?page=1
 	  //this.$http.post('/someUrl', [data], [options]).then(successCallback, errorCallback);
-	  console.log("enviando contenido")
 		
 	  this.$http.post("sendcontent", {nombre: this.nombrecatalogo, contenido: this.images})
 		.then(response => {

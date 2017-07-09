@@ -8,7 +8,7 @@ class CatalogoTableSchema extends Schema {
     this.create('catalogo', (table) => {
       table.increments()
       table.timestamps()
-      table.string('titulo').unique()
+      table.string('titulo').unique().nullable()
       table.string('descripcion')
       table.integer('estado') /* 0=borrador , 1=por catalogar ,2=publico */
     })

@@ -2,13 +2,47 @@
 {% block content %}
 
 
+<h3>Catalogadores Totales:</h3>
+ <table style="width:100%" >
+  <tr>
+    <th>Tipo Catalogador</th>
+    <th>Numero</th>
+  </tr>
+  <tr>
+    <td>Convergente</td>
+    <td>{{ cat_conteo[0] }}</td>
+  </tr>
+  <tr>
+    <td>Divergente</td>
+    <td>{{ cat_conteo[1] }}</td>
+  </tr>
+  <tr>
+    <td>Asimilador</td>
+    <td>{{ cat_conteo[2] }}</td>
+  </tr>
+  <tr>
+    <td>Acomodador</td>
+    <td>{{ cat_conteo[3] }}</td>
+  </tr>
+</table> 
+
+
+<h3>Listado de Catalogos:</h3>
+{% if catalogos.length != 0 %}
+<ul>
+	{% for item in catalogos %}
+		<li><a href="/experto/catalogo/1/{{ item.id }}">{{ item.titulo }}</a></li>
+		<button style="display: inline_block;">Borrar</button>
+	{% endfor %}
+</ul>
+{% endif %}
+
 
 			<p>Bienvenido a la aplicación!, coloque una lista de link donde quiera obtener contenido</p>
 
 			<div class="row">
 				<div class="col-sm-6">
 				  <h3>Ingresar Links</h3>
-
 				  {{ form.open({action: 'ContentsController.scrape'}) }}
 				  <div style="links-container">
 						{{ form.textarea('pagelist') }}
@@ -17,11 +51,9 @@
 						  {{ form.submit('Ingresar') }}
 					  </div>
 				  {{ form.close() }}
-
 				</div>
 				<div class="col-sm-6">
 				</div>
-
 			</div>
 
 <h3>Crear Usuario</h3>

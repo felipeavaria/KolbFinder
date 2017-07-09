@@ -3,6 +3,9 @@
 const Hash = use('Hash')
 const User = use('App/Model/User')
 const Catalogo = use('App/Model/Catalogo')
+const Contenido = use('App/Model/Contenido')
+const CatalogoCatalogador = use('App/Model/CatalogoCatalogador')
+const Database = use('Database')
 
 class UsersController {
 
@@ -62,7 +65,6 @@ class UsersController {
 
   * calificadordash (request, response) {
 	const user = yield request.auth.getUser()
-	console.log(user)
 	switch(user.attributes.type){
 	  case 1:
 		var typestring = "Convergente"
@@ -77,12 +79,22 @@ class UsersController {
 		var typestring = "Acomodador"
 		break
 	}
-	console.log(typestring)
-
 	const catalogos_ = yield Catalogo.all()
-		console.log(catalogos_)
-
-	yield response.sendView('calificador/dashboard', { type: typestring, catalogos: catalogos_.toJSON() })
+	const catalogados_ = yield Database.from('catalogo_catalogador').where({user_id: user.id})
+	var newCatalogos = []
+	var Catalogados = []
+	var doit = false
+	catalogos_.forEach(a => {
+		doit = false
+		catalogados_.forEach(b => {
+			if(b.catalogo_id === a.id){
+				doit = true
+			}
+		})
+		if(doit) Catalogados.push(a)
+		else newCatalogos.push(a)
+	})
+	yield response.sendView('calificador/dashboard', { type: typestring, catalogos: newCatalogos, catalogados: Catalogados })
   }
 
   * logout (request, response) {
