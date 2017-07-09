@@ -33,7 +33,7 @@
         <i class="fa fa-bars"></i>
       </button>
 
-      <a class="navbar-brand page-scroll" href="index.html">
+      <a class="navbar-brand page-scroll" href="#">
         KolbFinder</a>
       <img class="img-responsive" src="assets/logokf.png" style="width:40px;height:40px;margin-top:5px;"></img>
     </div>
@@ -41,49 +41,18 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav">
-        <li>
-          <a href="index.html">Home</a>
-        </li>
-        <li>
-          <a href="portfolio-item.html">Información</a>
-        </li>
-        <li>
-          <a href="page-sample.html">Contacto</a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contacto</a> 
+          <ul id="login-dp" class="dropdown-menu"> 
+            <li> 
+              <div class="alert alert-warning">
+                <font color="black">Para consultas y solicitudes de calificador, escribir a admin@kolbfinder.kf</font>
+              </div>
+            </li> 
+          </ul> 
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-          <ul id="login-dp" class="dropdown-menu">
-            <li>
-              {{ form.open({action: 'UsersController.login'}) }}
-              {{ csrfField }}
-              <div class="row">
-                <div class="col-md-12">
-                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                    <div class="form-group">
-                      <font color="black">
-                        <label class="sr-only" for="exampleInputEmail2">Correo Electrónico</label>
-                        {{ form.label('email', 'Correo') }}
-                        {{ form.text('email', null, {class:'form-control'}) }}
-                      </font>
-                    </div>
-                    <div class="form-group">
-                      <font color="black">
-                      {{ form.label('password', 'Password') }}
-                      {{ form.password('password', null, {class:'form-control'}) }}
-                      </font>
-                    </div>
-                    <div>
-                      {{ form.submit('Entrar', 'entrar', { class: 'btn btn-primary btn-block' }) }}
-                    </div>
-                  </form>
-                </div>
-                <div class="bottom text-center">
-                  <font color="black">¿Nuevo?</font> <a href="#"><b><font color="black">Registrarse</font></b></a>
-                </div>
-              </div>
-              {{ form.close() }}
-            </li>
-          </ul>
+          <a href="#about"><b>Login</b></a>
         </li>
       </ul>
     </div>
@@ -120,7 +89,93 @@
           aprovechando de mejor manera los elementos que ofrece el portal a sus alumnos.
         </p>
         <p>
-        <center><a href="#" class="btnghost"><i></i> Ingresar al Portal</a></center>
+        <div class="container4">
+
+          <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <a href="#" class="active" id="login-form-link">Login</a>
+                  </div>
+                  <div class="col-xs-6">
+                    <a href="#" id="register-form-link">Registro</a>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    {{ form.open({action: 'UsersController.login'}) }}
+                    {{ csrfField }}
+                    <form id="login-form" method="post" role="form" style="display: block;">
+
+                      <div class="form-group">
+                        {{ form.label('email', 'Correo') }}
+                        {{ form.text('email', null, {class:'form-control'}) }}
+
+                      </div>
+                      <div class="form-group">
+                        {{ form.label('password', 'Password') }}
+                        {{ form.password('password', null, {class:'form-control'}) }}
+
+                      </div>
+                      <div class="form-group text-center">
+                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                        <label for="remember"> Recordar</label>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 col-sm-offset-3">
+                            {{ form.submit('Entrar', 'entrar', { class: 'btn btn-primary btn-block' }) }}     
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            {% for error in old('errors') %} 
+                              <div class="alert alert-danger">
+                                <strong>Error: </strong>{{ error.message }}
+                              </div>
+                            {% endfor %} 
+                          </div>
+                        </div>
+                      </div>
+       
+                    </form>
+                    {{ form.close() }}
+                    <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                      <div class="form-group">
+                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
         </p>
       </div>
     </div>

@@ -3,26 +3,48 @@
 const Hash = use('Hash')
 const User = use('App/Model/User')
 const Catalogo = use('App/Model/Catalogo')
+const Validator = use('Validator')
 
 class UsersController {
-
   * login (request, response) {
 	  //La idea, es que se le pase los datos a esta función, y si efectivamente
 	  //existe, redirija al proximo sitio
 	  //const thepass = yield Hash.make(request.input('password'))
 	  //console.log(thepass)
-    const email = request.input('email')
-    const password = request.input('password')
-    const login = yield request.auth.attempt(email, password) 
-    if (login) {
-	  const user = yield request.auth.getUser()
-		if(user.type == 0) response.redirect('/experto')
-		else response.redirect('/calificador')
-		//response.send('Logged In Successfully')
+	const postData = request.only('email', 'password')
+
+	const rules = {
+		email: 'required',
+		password: 'required'
+	}
+
+	const validation = yield Validator.validate(postData, rules)
+
+    if (validation.fails()) {
+      yield request
+          .withOnly('email', 'password')
+          .andWith({errors: [{message:"Debe rellenar todas las casillas"}]})
+          .flash()
+      response.redirect('back')
       return
     }
 
-    response.unauthorized('Invalid credentails')
+    const email = request.input('email')
+    const password = request.input('password')
+
+    try{
+    	yield request.auth.attempt(email, password);
+    	const user = yield request.auth.getUser()
+		if(user.type == 0) response.redirect('/experto')
+		else response.redirect('/calificador')
+    } catch (e){
+    		yield request.withAll().andWith({errors:[{message: "Correo o contraseña incorrecta"}]}).flash()
+    		response.redirect('back')
+    		return
+    		//response.notFound('User not found');
+	
+    }
+
   }
 
   * profile (request, response) {
