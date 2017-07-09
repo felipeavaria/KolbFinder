@@ -26,6 +26,9 @@ const Referencium = use('App/Model/Referencium')
 
 /* Redirecciones*/
 Route.on('/').render('home').middleware('jumpuser')
+Route.on('/catalogos').render('experto/catalogos').middleware('typeauth')
+Route.on('/borradores').render('experto/borradores').middleware('typeauth')
+
 Route.get('/experto', 'AdminController.admindashboard').middleware('typeauth')
 Route.get('/calificador', 'UsersController.calificadordash').middleware('typeauthcal')
 
