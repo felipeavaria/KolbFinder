@@ -1,0 +1,34 @@
+{% extends 'experto/master' %}
+{% block content %}
+
+<h2>{{ catalogo.titulo }}</h2>
+<h3>Estilo elegido: {{ typestring }}</h3>
+
+Cambiar estilo: 
+<a href="/experto/catalogo/0/{{ id }}" class="btn btn-primary {{ buttons[0] }}">Total</a>
+<a href="/experto/catalogo/1/{{ id }}" class="btn btn-primary {{ buttons[1] }}">Convergente</a>
+<a href="/experto/catalogo/2/{{ id }}" class="btn btn-primary {{ buttons[2] }}">Divergente</a>
+<a href="/experto/catalogo/3/{{ id }}" class="btn btn-primary {{ buttons[3] }}">Asimilador</a>
+<a href="/experto/catalogo/4/{{ id }}" class="btn btn-primary {{ buttons[4] }}">Acomodador</a>
+
+ <table style="width:100%" >
+  <tr>
+    <th>Contenido</th>
+    <th>Estadisticas</th>
+  </tr>
+{% for item in contenido %}
+  <tr>
+    <td><img src="/content/{{ item.cuerpo }}"></img></td>
+    <td>
+			<ul>
+				<li>Likes: {{ item.likes }}</li>
+				<li>Dislikes: {{ item.total - item.likes }}</li>
+				<li>Total: {{ item.total }}</li>
+			</ul>
+		</td>
+  </tr>
+{% endfor %}
+</table> 
+
+{% endblock %}
+

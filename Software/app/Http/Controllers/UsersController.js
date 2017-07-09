@@ -3,26 +3,51 @@
 const Hash = use('Hash')
 const User = use('App/Model/User')
 const Catalogo = use('App/Model/Catalogo')
+const Contenido = use('App/Model/Contenido')
+const CatalogoCatalogador = use('App/Model/CatalogoCatalogador')
+const Database = use('Database')
+const Validator = use('Validator')
 
 class UsersController {
-
   * login (request, response) {
 	  //La idea, es que se le pase los datos a esta función, y si efectivamente
 	  //existe, redirija al proximo sitio
 	  //const thepass = yield Hash.make(request.input('password'))
 	  //console.log(thepass)
-    const email = request.input('email')
-    const password = request.input('password')
-    const login = yield request.auth.attempt(email, password) 
-    if (login) {
-	  const user = yield request.auth.getUser()
-		if(user.type == 0) response.redirect('/experto')
-		else response.redirect('/calificador')
-		//response.send('Logged In Successfully')
+	const postData = request.only('email', 'password')
+
+	const rules = {
+		email: 'required',
+		password: 'required'
+	}
+
+	const validation = yield Validator.validate(postData, rules)
+
+    if (validation.fails()) {
+      yield request
+          .withOnly('email', 'password')
+          .andWith({errors: [{message:"Debe rellenar todas las casillas"}]})
+          .flash()
+      response.redirect('back')
       return
     }
 
-    response.unauthorized('Invalid credentails')
+    const email = request.input('email')
+    const password = request.input('password')
+
+    try{
+    	yield request.auth.attempt(email, password);
+    	const user = yield request.auth.getUser()
+		if(user.type == 0) response.redirect('/experto')
+		else response.redirect('/calificador')
+    } catch (e){
+    		yield request.withAll().andWith({errors:[{message: "Correo o contraseña incorrecta"}]}).flash()
+    		response.redirect('back')
+    		return
+    		//response.notFound('User not found');
+	
+    }
+
   }
 
   * profile (request, response) {
@@ -62,7 +87,6 @@ class UsersController {
 
   * calificadordash (request, response) {
 	const user = yield request.auth.getUser()
-	console.log(user)
 	switch(user.attributes.type){
 	  case 1:
 		var typestring = "Convergente"
@@ -77,12 +101,22 @@ class UsersController {
 		var typestring = "Acomodador"
 		break
 	}
-	console.log(typestring)
-
 	const catalogos_ = yield Catalogo.all()
-		console.log(catalogos_)
-
-	yield response.sendView('calificador/dashboard', { type: typestring, catalogos: catalogos_.toJSON() })
+	const catalogados_ = yield Database.from('catalogo_catalogador').where({user_id: user.id})
+	var newCatalogos = []
+	var Catalogados = []
+	var doit = false
+	catalogos_.forEach(a => {
+		doit = false
+		catalogados_.forEach(b => {
+			if(b.catalogo_id === a.id){
+				doit = true
+			}
+		})
+		if(doit) Catalogados.push(a)
+		else newCatalogos.push(a)
+	})
+	yield response.sendView('calificador/dashboard', { type: typestring, catalogos: newCatalogos, catalogados: Catalogados })
   }
 
   * logout (request, response) {

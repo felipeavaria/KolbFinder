@@ -20,21 +20,17 @@ var app2 = new Vue({
 		token: window.Adonis
   },
   mounted: function () {
-     // make sure you have vue-resource inlcued in your html head
-	that = this
-
-	var id = this.$route.query.id
-
-	this.$http.get("/calificador/catalogo/api/"+id).then(response => {
-	  // get body data
-	  response.data.forEach(function(value, index){
-		that.images.push({
-		  	key: index,
-			select: false,
-		  	src: "/content/"+value.cuerpo,
-				id: value.id
-		})
-	  });
+		that = this
+		var id = this.$route.query.id
+		this.$http.get("/calificador/catalogo/api/"+id).then(response => {
+			response.data.forEach(function(value, index){
+			that.images.push({
+					key: index,
+				select: false,
+					src: "/content/"+value.cuerpo,
+					id: value.id
+			})
+		});
 	}, response => {
 	  console.log("error")
 	  // error callback

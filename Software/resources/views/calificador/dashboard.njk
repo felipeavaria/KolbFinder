@@ -7,6 +7,7 @@
 <p>Todavia el profesor, no ha subido material para calificar</p>
 
 {% else %}
+<h3>Catalogos por revisar</h3>
 <ul>
 {% for item in catalogos %}
 	
@@ -15,5 +16,17 @@
 </ul>
 
 {% endif %}
+
+{% if catalogados.length === 0 %}
+sadf
+{% else %}
+<h3>Catalogos revisados</h3>
+<ul>
+	{% for item in catalogados %}
+		<li>{{ item.titulo }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
 
 {% endblock %}

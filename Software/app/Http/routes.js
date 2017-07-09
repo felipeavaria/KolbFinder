@@ -26,8 +26,10 @@ const Referencium = use('App/Model/Referencium')
 
 /* Redirecciones*/
 Route.on('/').render('home').middleware('jumpuser')
-Route.on('/experto').render('experto/dashboard').middleware('typeauth')
-//Route.on('/calificador').render('calificador').middleware('typeauthcal')
+Route.on('/catalogos').render('experto/catalogos').middleware('typeauth')
+Route.on('/borradores').render('experto/borradores').middleware('typeauth')
+
+Route.get('/experto', 'AdminController.admindashboard').middleware('typeauth')
 Route.get('/calificador', 'UsersController.calificadordash').middleware('typeauthcal')
 
 /* API */
@@ -75,3 +77,7 @@ Route.get('/referencia', function * (request, response) {
 
 
 Route.post('/enviarcalificacion', 'CalificacionController.enviarcalificacion')
+
+
+
+Route.get('/experto/catalogo/:type/:id', 'AdminController.catalogoview').middleware('typeauth')

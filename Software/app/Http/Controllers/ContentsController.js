@@ -11,7 +11,6 @@ class ContentsController {
   * scrape (request, response) {
 		var data = request.only('pagelist').pagelist
 		var pages = data.split('\r\n')
-	  	console.log(pages);
 	  yield fs.remove('public/cache', scrape({
 		  urls: pages,
 		  directory: 'public/cache',
@@ -29,7 +28,6 @@ class ContentsController {
 		  */
 	}, (error, result) => {
 		if(result){ 
-			console.log("done")
 			//response.ok("Process Ready")
 			response.redirect('/test3')
 		}
