@@ -19,11 +19,11 @@ var app = new Vue({
 	this.$http.get("image").then(response => {
 	  // get body data
 	  response.data.data.forEach(function(value, index){
-		that.images.push({
-		  	key: index,
-			select: false,
-		  	src: value
-		})
+			that.images.push({
+				key: index,
+				select: false,
+				src: value
+			})
 	  });
 	}, response => {
 	  console.log("error")
