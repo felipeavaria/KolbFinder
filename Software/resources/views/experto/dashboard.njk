@@ -2,6 +2,9 @@
 {% block content %}
 
 
+<h1>Bienvenido a KolbFinder!</h1>
+<p> La plataforma diseñada para la gestión de contenidos y aprendizaje espeializado</p>
+
 <h3>Catalogadores Totales:</h3>
  <table style="width:100%" >
   <tr>
@@ -25,38 +28,6 @@
     <td>{{ cat_conteo[3] }}</td>
   </tr>
 </table> 
-
-
-<h3>Listado de Catalogos:</h3>
-{% if catalogos.length != 0 %}
-<ul>
-	{% for item in catalogos %}
-		<li><a href="/experto/catalogo/1/{{ item.id }}">{{ item.titulo }}</a></li>
-		<button style="display: inline_block;">Borrar</button>
-	{% endfor %}
-</ul>
-{% endif %}
-
-
-			<p>Bienvenido a la aplicación!, coloque una lista de link donde quiera obtener contenido</p>
-			<h1>Bienvenido a KolbFinder!</h1>
-			<p> La plataforma diseñada para la gestión de contenidos y aprendizaje espeializado</p>
-
-			<div class="row">
-				<div class="col-sm-6">
-				  <h3>Ingresar Links</h3>
-				  {{ form.open({action: 'ContentsController.scrape'}) }}
-				  <div style="links-container">
-						{{ form.textarea('pagelist') }}
-					  </div>
-					  <div class="button">
-						  {{ form.submit('Ingresar') }}
-					  </div>
-				  {{ form.close() }}
-				</div>
-				<div class="col-sm-6">
-				</div>
-			</div>
 
 <h3>Crear Usuario</h3>
 <br>

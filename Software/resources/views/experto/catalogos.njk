@@ -1,5 +1,25 @@
 {% extends 'experto/master' %}
 {% block content %}
 
+<h3>Listado de Catalogos:</h3>
+{% if catalogosact.length != 0 %}
+<ul>
+	{% for item in catalogosact %}
+		<li><a href="/experto/catalogo/1/{{ item.id }}">{{ item.titulo }}</a>
+		<a class="btn btn-danger btn-sm" href="/api/delete/experto/catalogo/{{item.id}}" style="display: inline_block;">Borrar</a></li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% if catalogospublicos.length != 0 %}
+<h3>Catalogos Publicados:</h3>
+<ul>
+	{% for item in catalogospublicos %}
+		<li><a href="/experto/catalogo/1/{{ item.id }}">{{ item.titulo }}</a>
+		<a class="btn btn-danger btn-sm" href="/api/delete/experto/catalogo/{{item.id}}" style="display: inline_block;">Borrar</a></li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+
 {% endblock %}
 

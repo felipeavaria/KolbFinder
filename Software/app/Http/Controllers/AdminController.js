@@ -89,8 +89,128 @@ class AdminController {
 				})
 			})
 		}
-		yield response.sendView('experto/catalogo_view', { contenido: contenidos, typestring: typestring, catalogo: catalogo, id: id, buttons: buttons })
+		yield response.sendView('/experto/catalogo_view', {id_: id, type_:type, contenido: contenidos, typestring: typestring, catalogo: catalogo, id: id, buttons: buttons })
 	}
+
+
+	* catalogoviewapi(request, response){
+		const id = request.param('id')
+		const type = request.param('type')
+		const catalogo = yield Database.from('catalogo').where({id: id}).first()
+		var contenidos = yield Database.from('contenido')
+			.where({catalogo_id: id})
+		var buttons = ['','','','','']
+		buttons[type] = 'active'
+		var data = []
+
+		var typestring = "Total"
+		var calificaciones = yield Database.from('contenido') 
+			 .where({catalogo_id: id}) 
+			 .leftJoin('calificacion', 'contenido.id', 'calificacion.contenido_id');
+		contenidos.forEach(a => {
+			a.likes = 0
+			a.total = 0
+			calificaciones.forEach(b => {
+				if(a.id === b.contenido_id){ 
+					if(b.calificacion === 1) a.likes++
+					a.total++
+				}
+			})
+		})
+		data.push(contenidos)
+		for(var i=1; i<=4; i++){
+			var contenidos = yield Database.from('contenido')
+				.where({catalogo_id: id})
+			var calificaciones = yield Database.from('contenido') 
+				 .where({catalogo_id: id}) 
+				 .leftJoin('calificacion', 'contenido.id', 'calificacion.contenido_id')
+				 .leftJoin('users','calificacion.user_id','users.id');
+			switch(type){
+				case '1':
+					typestring = "Convergente"
+					break
+				case '2':
+					typestring = "Divergente"
+					break
+				case '3':
+					typestring = "Asimilador"
+					break
+				case '4':
+					typestring = "Acomodador"
+					break
+			}
+			contenidos.forEach(a => {
+				a.likes = 0
+				a.total = 0
+				calificaciones.forEach(b => {
+					if(a.id === b.contenido_id && i == b.type){ 
+						if(b.calificacion === 1) a.likes++
+						a.total++
+					}
+				})
+			})
+			data.push(contenidos)
+		}
+		response.json({ contenido: data, typestring: typestring, catalogo: catalogo, id: id, buttons: buttons })
+	}
+
+	* viewcatalogos(request, response){
+		const catalogos = yield Catalogo.all()
+		var catalogosActivos = []
+		var catalogosPublicos = []
+		catalogos.forEach(a => {
+			if(a.estado == 2) catalogosPublicos.push(a)
+			else catalogosActivos.push(a)
+		})
+		yield response.sendView('experto/catalogos', {catalogosact: catalogosActivos, catalogospublicos: catalogosPublicos})
+	}
+
+	* makepublic(request, response) {
+		var data = request.post()
+		console.log("Data que llega de la seleccion:")
+		console.log(data)
+		// hacer aqui un for, o colocar las 4 operaciones para agregar a la BD, publicamente los contenidos
+		const catalogo = yield Catalogo.findBy('id', data.contenido[0][0].catalogo_id)
+
+		for(var i=0; i<data.contenido[0].length; i++){
+			var aux = yield Contenido.find(data.contenido[0][i].id)
+			if(data.contenido[0][i].select === true) aux.publico_0 = 1
+			yield aux.save()
+		}
+		for(var i=0; i<data.contenido[1].length; i++){
+			var aux = yield Contenido.find(data.contenido[1][i].id)
+			if(data.contenido[1][i].select === true) aux.publico_1 = 1
+			yield aux.save()
+		}
+		for(var i=0; i<data.contenido[2].length; i++){
+			var aux = yield Contenido.find(data.contenido[2][i].id)
+			if(data.contenido[2][i].select === true) aux.publico_2 = 1
+			yield aux.save()
+		}
+		for(var i=0; i<data.contenido[3].length; i++){
+			var aux = yield Contenido.find(data.contenido[3][i].id)
+			if(data.contenido[3][i].select === true) aux.publico_3 = 1
+			yield aux.save()
+		}
+		for(var i=0; i<data.contenido[4].length; i++){
+			var aux = yield Contenido.find(data.contenido[4][i].id)
+			if(data.contenido[4][i].select === true) aux.publico_4 = 1
+			yield aux.save()
+		}
+
+		catalogo.estado = 2
+		yield catalogo.save()
+		response.json("done")
+	}
+
+	* deletecatalogo(request, response) {
+		var data = request.param('id')
+		console.log(data)
+		const catalogo = yield Catalogo.findBy('id', data)
+		yield catalogo.delete()
+		response.redirect('/catalogos')
+	}
+
 }
 
 module.exports = AdminController
