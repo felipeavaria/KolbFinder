@@ -81,3 +81,4 @@ Route.post('/enviarcalificacion', 'CalificacionController.enviarcalificacion')
 
 
 Route.get('/experto/catalogo/:type/:id', 'AdminController.catalogoview').middleware('typeauth')
+Route.get('/api/experto/catalogo/:type/:id', 'AdminController.catalogoviewapi').middleware('typeauth')

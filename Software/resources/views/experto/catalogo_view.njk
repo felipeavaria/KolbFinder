@@ -1,34 +1,46 @@
 {% extends 'experto/master' %}
 {% block content %}
 
-<h2>{{ catalogo.titulo }}</h2>
-<h3>Estilo elegido: {{ typestring }}</h3>
 
-Cambiar estilo: 
-<a href="/experto/catalogo/0/{{ id }}" class="btn btn-primary {{ buttons[0] }}">Total</a>
-<a href="/experto/catalogo/1/{{ id }}" class="btn btn-primary {{ buttons[1] }}">Convergente</a>
-<a href="/experto/catalogo/2/{{ id }}" class="btn btn-primary {{ buttons[2] }}">Divergente</a>
-<a href="/experto/catalogo/3/{{ id }}" class="btn btn-primary {{ buttons[3] }}">Asimilador</a>
-<a href="/experto/catalogo/4/{{ id }}" class="btn btn-primary {{ buttons[4] }}">Acomodador</a>
+<div id="admincatalogo" >
+	<h2>{{ catalogo.titulo }}</h2>
+	<h3>Estilo elegido: ?% adonisobject.typestring %?</h3>
+	Cambiar estilo: 
+	<a v-on:click="changeView(0)" class="btn btn-primary"  >Total</a>
+	<a v-on:click="changeView(1)" class="btn btn-primary"  >Convergente</a>
+	<a v-on:click="changeView(2)" class="btn btn-primary"  >Divergente</a>
+	<a v-on:click="changeView(3)" class="btn btn-primary"  >Asimilador</a>
+	<a v-on:click="changeView(4)" class="btn btn-primary"  >Acomodador</a>
 
  <table style="width:100%" >
   <tr>
     <th>Contenido</th>
     <th>Estadisticas</th>
   </tr>
-{% for item in contenido %}
-  <tr>
-    <td><img src="/content/{{ item.cuerpo }}"></img></td>
-    <td>
-			<ul>
-				<li>Likes: {{ item.likes }}</li>
-				<li>Dislikes: {{ item.total - item.likes }}</li>
-				<li>Total: {{ item.total }}</li>
-			</ul>
-		</td>
-  </tr>
-{% endfor %}
+	<tbody>
+	  <transition-group>
+		<tr v-for="item in images" :key="item.key">
+			<td>
+				<img @click="item.select = true" v-if="item.select" style="float: left; border-style: solid; border-width: 3px; border-color: green; margin: 3px 3px 3px 3px" :src="item.imgurl"></img>
+				<img @click="item.select = true" v-else style="float: left; border-style: solid; border-width: 3px; border-color: red; margin: 3px 3px 3px 3px" :src="item.imgurl"></img>
+			</td>
+			<td>
+				<ul>
+					<li>Likes: ?% item.likes %?</li>
+					<li>Dislikes: ?% item.total - item.likes %?</li>
+					<li>Total: ?% item.total %?</li>
+					<li>Select: ?% item.select %?</li>
+					<li>Key: ?% item.key %?</li>
+				</ul>
+			</td>
+		</tr>
+	  </transition-group>
+	</tbody>
 </table> 
+</div>
+
+
+
 
 {% endblock %}
 
