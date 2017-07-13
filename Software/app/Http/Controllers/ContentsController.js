@@ -5,6 +5,7 @@ const	fs 			= require('fs-extra')
 const User = use('App/Model/User')
 const Catalogo = use('App/Model/Catalogo')
 const Contenido = use('App/Model/Contenido')
+const Database = use('Database')
 
 class ContentsController {
 
@@ -139,8 +140,6 @@ class ContentsController {
 		yield response.sendView('calificador/vercatalogo', { contenidos: contenidos })
   }
 
-	
-
 	//
 
   * ingreso (request, response) {
@@ -155,7 +154,45 @@ class ContentsController {
 
     response.unauthorized('Invalid credentails')
   }
-	//
+
+
+  * publiccatalogoapi (request, response) {
+		const catalogos = yield Catalogo.all()
+		var catalogosPublicos = []
+		catalogos.forEach(a => {
+			console.log(a)
+			if(a.estado == 2) catalogosPublicos.push(a)
+		})
+		console.log(catalogosPublicos)
+		yield response.sendView('catalogos', {catalogos: catalogosPublicos})
+  }
+	
+
+  * publiccontenidoapi (request, response) {
+		const tipo = request.param('type')
+		const id = request.param('id')
+
+		switch(tipo){
+			case 'convergente':
+				var contenido =  yield Database.from('contenido').where({catalogo_id: id, publico_1: 1})
+				break
+			case 'divergente':
+				var contenido =  yield Database.from('contenido').where({catalogo_id: id, publico_2: 1})
+				break
+			case 'asimilador':
+				var contenido =  yield Database.from('contenido').where({catalogo_id: id, publico_3: 1})
+				break
+			case 'acomodador':
+				var contenido =  yield Database.from('contenido').where({catalogo_id: id, publico_4: 1})
+				break
+			default:
+				var contenido =  yield Database.from('contenido').where({catalogo_id: id, publico_0: 1})
+				break
+		}
+		console.log(contenido)
+
+		yield response.sendView('contenido', {id: id, tipo: tipo, contenido: contenido})
+  }
 }
 
 

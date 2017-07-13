@@ -89,7 +89,7 @@ class AdminController {
 				})
 			})
 		}
-		yield response.sendView('/experto/catalogo_view', {id_: id, type_:type, contenido: contenidos, typestring: typestring, catalogo: catalogo, id: id, buttons: buttons })
+		yield response.sendView('experto/catalogo_view', {id_: id, type_:type, contenido: contenidos, typestring: typestring, catalogo: catalogo, id: id, buttons: buttons })
 	}
 
 
@@ -167,38 +167,45 @@ class AdminController {
 
 	* makepublic(request, response) {
 		var data = request.post()
-		console.log("Data que llega de la seleccion:")
-		console.log(data)
 		// hacer aqui un for, o colocar las 4 operaciones para agregar a la BD, publicamente los contenidos
-		const catalogo = yield Catalogo.findBy('id', data.contenido[0][0].catalogo_id)
 
+		console.log(data)
+		console.log("1er for")
 		for(var i=0; i<data.contenido[0].length; i++){
 			var aux = yield Contenido.find(data.contenido[0][i].id)
+			console.log("for")
 			if(data.contenido[0][i].select === true) aux.publico_0 = 1
 			yield aux.save()
 		}
+		console.log("1er for")
 		for(var i=0; i<data.contenido[1].length; i++){
 			var aux = yield Contenido.find(data.contenido[1][i].id)
 			if(data.contenido[1][i].select === true) aux.publico_1 = 1
 			yield aux.save()
 		}
+		console.log("Data que llega de la seleccion:")
 		for(var i=0; i<data.contenido[2].length; i++){
 			var aux = yield Contenido.find(data.contenido[2][i].id)
 			if(data.contenido[2][i].select === true) aux.publico_2 = 1
 			yield aux.save()
 		}
+		console.log("1er for")
 		for(var i=0; i<data.contenido[3].length; i++){
 			var aux = yield Contenido.find(data.contenido[3][i].id)
 			if(data.contenido[3][i].select === true) aux.publico_3 = 1
 			yield aux.save()
 		}
+		console.log("1er for")
 		for(var i=0; i<data.contenido[4].length; i++){
 			var aux = yield Contenido.find(data.contenido[4][i].id)
 			if(data.contenido[4][i].select === true) aux.publico_4 = 1
 			yield aux.save()
 		}
 
+		const catalogo = yield Catalogo.findBy('id', data.contenido[0][0].catalogo_id)
 		catalogo.estado = 2
+
+
 		yield catalogo.save()
 		response.json("done")
 	}
