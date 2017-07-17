@@ -75,13 +75,48 @@ class UsersController {
 		user.type = 4
 		break
 	}
+
+	const postData = request.only('email', 'username', 'password')
+
+	const rules = {
+		email: 'required',
+		username: 'required',
+		password: 'required'
+	}
+
+	const validation = yield Validator.validate(postData, rules)
+
+    if (validation.fails()) {
+      yield request
+          .withOnly('email', 'username', 'password')
+          .andWith({errors: [{message:"Debe rellenar todas las casillas"}]})
+          .flash()
+      response.redirect('back')
+      return
+    }
+
 	user.username = request.input('username')
 	user.email = request.input('email')
 	user.password = request.input('password')
-	console.log(user)
-	console.log("Usuario registrado")	
-	yield user.save()
-	response.redirect('/')
+
+	const usuarios = yield Database.from('users').where({email: user.email})
+	const nombre_usuario = yield Database.from('users').where({username: user.username})
+
+	if(usuarios.length == 0){
+		if(nombre_usuario.length == 0){
+			yield user.save()
+			yield request.withAll().andWith({exito:[{message: "Usuario registrado correctamente."}]}).flash()
+			response.redirect('back')
+			return
+		}
+		yield request.withAll().andWith({errors:[{message: "Nombre de usuario existente."}]}).flash()
+		response.redirect('back')
+		return
+	}
+
+	yield request.withAll().andWith({errors:[{message: "Correo electrónico existente."}]}).flash()
+	response.redirect('back')
+	return	
 
   }
 
