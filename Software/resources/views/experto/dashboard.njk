@@ -1,58 +1,92 @@
 {% extends 'experto/master' %}
 {% block content %}
 
-
-<h1>Bienvenido a KolbFinder!</h1>
-<p> La plataforma diseñada para la gestión de contenidos y aprendizaje espeializado</p>
-
-<h3>Catalogadores Totales:</h3>
- <table style="width:100%" >
-  <tr>
-    <th>Tipo Catalogador</th>
-    <th>Numero</th>
-  </tr>
-  <tr>
-    <td>Convergente</td>
-    <td>{{ cat_conteo[0] }}</td>
-  </tr>
-  <tr>
-    <td>Divergente</td>
-    <td>{{ cat_conteo[1] }}</td>
-  </tr>
-  <tr>
-    <td>Asimilador</td>
-    <td>{{ cat_conteo[2] }}</td>
-  </tr>
-  <tr>
-    <td>Acomodador</td>
-    <td>{{ cat_conteo[3] }}</td>
-  </tr>
-</table> 
-
-<h3>Crear Usuario</h3>
-<br>
-<br>
-<br>
-<br>			
-<h3>Agregue Nuevos Calificadores</h3>
-{{ form.open({action: 'UsersController.create'}) }}
-  {{ csrfField }}
-
-  {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, 'Tipo de aprendizaje usuario') }}
-  <br>
-  {{ form.label('email', 'Correo Electronico') }}
-  {{ form.text('email') }}
-  <br>
-  {{ form.label('username', 'Nombre de Usuario') }}
-  {{ form.text('username') }}
-  <br>
-  {{ form.label('password', 'Contraseña') }}
-  {{ form.password('password') }}
-
-  <div class="button">
-	{{ form.submit('Registrar') }}
+<div class="container">
+        {% for error in old('exito') %} 
+          <div class="alert alert-success">
+            <strong>Exito: </strong>{{ error.message }}
+          </div>
+        {% endfor %}      
+  <div class="page-header">
+    <h1>Bienvenido a KolbFinder</h1>      
   </div>
-{{ form.close() }}
+  <p>La plataforma diseñada para la gestión de contenidos y aprendizaje espeializado</p>      
+  <br style="clear:both"> 
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Totales Calificadores</h3>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th>Tipo Calificadores</th>
+            <th>Numero</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Convergente</td>
+            <td>{{ cat_conteo[0] }}</td>
+          </tr>
+          <tr>
+            <td>Divergente</td>
+            <td>{{ cat_conteo[1] }}</td>
+          </tr>
+          <tr>
+            <td>Asimilador</td>
+            <td>{{ cat_conteo[2] }}</td>
+          </tr>
+          <tr>
+            <td>Acomodador</td>
+            <td>{{ cat_conteo[3] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="form-area">
+    {{ form.open({action: 'UsersController.create'}) }}
+    {{ csrfField }}  
+      <form role="form">
+        <h3 style="margin-bottom: 25px; text-align: center;">Agregar Nuevos Calificadores</h3>
+        <div class="form-group">
+          {{ form.label('email', 'Tipo de aprendizaje usuario: ') }}
+          {{ form.select('type', ['Convergente','Divergente','Asimilador','Acomodador'], null, '') }}
+        </div>
+        <div class="form-group">
+          {{ form.label('email', 'Correo Electronico') }}
+          {{ form.text('email', null, {class:'form-control'}) }}
+        </div>
+        <div class="form-group">
+          {{ form.label('username', 'Nombre de Usuario') }}
+          {{ form.text('username', null, {class:'form-control'}) }}
+        </div>
+        <div class="form-group">
+          {{ form.label('password', 'Contraseña') }}
+          {{ form.password('password', null, {class:'form-control'}) }}
+        </div> 
+        <div class="button">
+          {{ form.submit('Agregar', null, {class:'btn btn-primary pull-right'}) }}
+        </div>
+        <br style="clear:both"> 
+        <br style="clear:both"> 
+        {% for error in old('errors') %} 
+          <div class="alert alert-danger">
+            <strong>Error: </strong>{{ error.message }}
+          </div>
+        {% endfor %}       
+
+      </form>
+    {{ form.close() }}
+    </div>
+  </div> 
+</div>
+
+
+
 
 {% endblock %}
 

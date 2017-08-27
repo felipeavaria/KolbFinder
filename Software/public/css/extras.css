@@ -3,6 +3,16 @@
   flex-direction: column;
   min-height: 40vh;
 }
+.red{
+    color:red;
+    }
+.form-area
+{
+    background-color: #FAFAFA;
+	padding: 10px 40px 60px;
+	margin: 0px 0px 60px;
+	border: 1px solid GREY;
+}
 
 section.content {
   flex: 1;
@@ -12,3 +22,4 @@ textarea {
 		width: 800px;
 		height: 500px;
 }
+
