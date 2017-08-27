@@ -17,8 +17,6 @@ Vue.component('that-image', {
     },
 		selectItem: function() {
 			this.image.select = !this.image.select
-			console.log(this.image)
-			console.log("hahaha")
 		}
   },
   mounted: function(){
@@ -58,8 +56,8 @@ new Vue({
 			that.adonisobject.contenido.forEach((a, index) => {
 				a.forEach((b, index2) => {
 					b.src = "/content/"+b.cuerpo
-					b.select = false
 					b.key = index2
+					this.$set(b, 'select', false) //se usa el set, para reactividad de Vue.
 				})
 				that.images.push(a)
 			})
